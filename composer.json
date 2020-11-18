@@ -1,0 +1,25 @@
+{
+    "type": "project",
+    "name": "macbor/task_separator",
+    "license": "MIT",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Maciej Borkowski",
+            "email": "macbor@outlook.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
+    }
+}
