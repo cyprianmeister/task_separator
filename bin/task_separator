@@ -2,4 +2,10 @@
 <?php
 require __DIR__.'/../vendor/autoload.php';
 
-echo 'app run...';
+use App\Main;
+
+try {
+    return Main::create()->run();
+} catch (\Exception $e) {
+    return $e->getCode() ?? 1;
+}
