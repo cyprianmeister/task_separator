@@ -1,0 +1,4 @@
+#!/usr/bin/env php
+<?php
+
+passthru(__DIR__.'/../vendor/bin/simple-phpunit --testdox');
