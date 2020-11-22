@@ -2,7 +2,7 @@
 
 namespace App\Reader;
 
-use App\Reader\Model\TaskCollectionInterface;
+use App\Common\Model\TaskCollectionInterface;
 use App\Reader\Type\ReaderFactoryInterface;
 use App\Reader\Type\ReaderInterface;
 

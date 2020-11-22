@@ -12,7 +12,8 @@
     "require": {
         "php": ">=7.4.4",
         "ext-json": "*",
-        "symfony/console": "^5.1"
+        "symfony/console": "^5.1",
+        "symfony/serializer": "^5.1"
     },
     "require-dev": {
         "symfony/phpunit-bridge": "^5.1"

@@ -12,6 +12,8 @@ class OutputTask extends BaseTask
 
     protected string $comments;
 
+    protected ?\DateTime $dueDate;
+
     protected \DateTime $createdAt;
 
     public function setStatus(string $status): OutputTask

@@ -3,7 +3,7 @@
 namespace App\Tests\Reader;
 
 use App\Common\Model\Enum\Format;
-use App\Reader\Model\TaskCollectionInterface;
+use App\Common\Model\TaskCollectionInterface;
 use App\Reader\Reader;
 use App\Reader\Type\JsonReader;
 use App\Reader\Type\ReaderFactoryInterface;

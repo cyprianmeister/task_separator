@@ -1,0 +1,14 @@
+[
+    {
+        "number":1.234,
+        "description":null,
+        "dueDate":"2020-02-30 13:30:00",
+        "phone":"xyz"
+    }
+    {
+        "number":xyz",
+        "description":1.234,
+        "dueDate":"2020/01/07",
+        "phone":null
+    },
+]

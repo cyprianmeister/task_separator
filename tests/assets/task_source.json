@@ -1,0 +1,32 @@
+[
+    {
+        "number":1,
+        "description":"Awaria klimatyzacji. Na salonie temperatura wzrosła do 27 stopni. Pozdrawiam Ela.",
+        "dueDate":"2020-01-04 13:30:00",
+        "phone":"123456789"
+    },
+    {
+        "number":2,
+        "description":"Prośba o wizytę",
+        "dueDate":"2020-01-07",
+        "phone":"123456789"
+    },
+    {
+        "number":3,
+        "description":"   Prośba o wizytę    ",
+        "dueDate":"",
+        "phone":""
+    },
+    {
+        "number":4,
+        "description":"   Prośba o wizytę    ",
+        "dueDate":null,
+        "phone":null
+    },
+    {
+        "number":5,
+        "description":"   Prośba o wizytę    ",
+        "dueDate":"2019",
+        "phone":"123456789"
+    }
+]
