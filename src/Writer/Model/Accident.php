@@ -15,4 +15,9 @@ class Accident extends OutputTask
         $this->priority = $priority;
         return $this;
     }
+
+    public function getPriority(): string
+    {
+        return $this->priority;
+    }
 }

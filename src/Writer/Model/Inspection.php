@@ -15,4 +15,9 @@ class Inspection extends OutputTask
         $this->weekOfYear = $weekOfYear;
         return $this;
     }
+
+    public function getWeekOfYear(): ?int
+    {
+        return $this->weekOfYear;
+    }
 }

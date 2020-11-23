@@ -52,8 +52,38 @@ class OutputTask extends BaseTask
         return $this;
     }
 
-    protected function getType(): string
+    public function getType(): string
     {
-        return static::$type ?: (new \ReflectionClass(static::class))->getName();
+        return static::$type ?? (new \ReflectionClass(static::class))->getName();
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getPhone(): string
+    {
+        return $this->phone;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->status;
+    }
+
+    public function getComments(): string
+    {
+        return $this->comments;
+    }
+
+    public function getDueDate(): ?\DateTime
+    {
+        return $this->dueDate;
+    }
+
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
     }
 }

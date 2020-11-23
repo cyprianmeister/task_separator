@@ -49,4 +49,9 @@ class TaskCollection implements TaskCollectionInterface
     {
         return count($this->items);
     }
+
+    public function toArray(): array
+    {
+        return $this->items;
+    }
 }
