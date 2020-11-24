@@ -8,16 +8,8 @@ class Inspection extends OutputTask
 {
     protected static string $type = TaskType::INSPECTION;
 
-    protected ?int $weekOfYear;
-
-    public function setWeekOfYear(?int $weekOfYear): Inspection
-    {
-        $this->weekOfYear = $weekOfYear;
-        return $this;
-    }
-
     public function getWeekOfYear(): ?int
     {
-        return $this->weekOfYear;
+        return $this->dueDate ? (int)$this->dueDate->format('W') : null;
     }
 }
