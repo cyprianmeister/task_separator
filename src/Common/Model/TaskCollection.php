@@ -54,4 +54,13 @@ class TaskCollection implements TaskCollectionInterface
     {
         return $this->items;
     }
+
+    public function getUniqueByCallback(callable $callback): TaskCollectionInterface
+    {
+        $mappedItems = array_map($callback, $this->items);
+        $keys = array_keys(array_unique($mappedItems));
+        $filteredItems = array_filter($this->items, fn (int $key) => in_array($key, $keys), ARRAY_FILTER_USE_KEY);
+
+        return new TaskCollection($filteredItems);
+    }
 }
