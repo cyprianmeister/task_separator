@@ -7,6 +7,9 @@ use App\Common\Model\Enum\InspectionStatus;
 use App\Common\Model\Enum\Priority;
 use App\Common\Model\Enum\TaskType;
 use App\Converter\Converter;
+use App\Converter\Exception\ConverterException;
+use App\Converter\Type\AccidentConverter;
+use App\Converter\Type\InspectionConverter;
 use App\Reader\Model\InputTask;
 use App\Writer\Model\Accident;
 use App\Writer\Model\Inspection;
@@ -103,11 +106,34 @@ class ConverterTest extends TestCase
         $this->check($source, $target, Accident::class);
     }
 
+    public function testConverterIfTypeNotExists(): void
+    {
+        $inputTask = new InputTask([
+            'number' => 1,
+            'description' => 'Opis zwykłego zlecenia.',
+            'dueDate' =>  new \DateTime('2020-01-04 13:30:00'),
+            'phone' => '123456789',
+        ]);
+
+        $converter = new Converter([
+            TaskType::INSPECTION => InspectionConverter::class,
+        ]);
+
+        $this->expectException(ConverterException::class);
+
+        /** @var Inspection $outputTask */
+        $outputTask = $converter->convert($inputTask);
+    }
+
     private function check(array $source, array $target, string $class): void
     {
         $inputTask = new InputTask($source);
 
-        $converter = new Converter();
+        $converter = new Converter([
+            TaskType::INSPECTION => InspectionConverter::class,
+            TaskType::ACCIDENT => AccidentConverter::class,
+        ]);
+
         /** @var Inspection $outputTask */
         $outputTask = $converter->convert($inputTask);
 
