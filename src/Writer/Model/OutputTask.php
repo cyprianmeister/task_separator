@@ -10,11 +10,16 @@ class OutputTask extends BaseTask
 
     protected string $status;
 
-    protected string $comments;
+    protected string $comments = '';
 
     protected ?\DateTime $dueDate;
 
     protected \DateTime $createdAt;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function setStatus(string $status): OutputTask
     {
