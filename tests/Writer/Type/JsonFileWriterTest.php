@@ -24,7 +24,7 @@ class JsonFileWriterTest extends TestCase
         $target = __DIR__ . '/../../assets/result/target.json';
         $taskCollection = new TaskCollection([
             (new OutputTask())
-                ->setDescription('test description')
+                ->setDescription('zażółć gęślą jaźń')
                 ->setComments('')
                 ->setCreatedAt(new \DateTime('2020-01-01 01:01:01'))
                 ->setDueDate(new \DateTime('2020-02-01 01:01:01'))

@@ -63,4 +63,14 @@ class TaskCollection implements TaskCollectionInterface
 
         return new TaskCollection($filteredItems);
     }
+
+    public function add(BaseTask $task): void
+    {
+        $this->items[] = $task;
+    }
+
+    public function take(int $key): ?BaseTask
+    {
+        return array_slice($this->items, $key, 1)[0] ?? null;
+    }
 }

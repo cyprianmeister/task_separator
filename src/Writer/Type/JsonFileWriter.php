@@ -33,7 +33,7 @@ class JsonFileWriter implements WriterInterface
     public function write(TaskCollectionInterface $taskCollection): void
     {
         try {
-            $jsonContent = $this->serializer->serialize($taskCollection->toArray(), Format::JSON);
+            $jsonContent = $this->serializer->serialize($taskCollection->toArray(), Format::JSON, ['json_encode_options' => JSON_UNESCAPED_UNICODE]);
         } catch (\Throwable $e) {
             throw new JsonFileWriterException('Task collection can\'t be serialized. ' . $e->getMessage());
         }
