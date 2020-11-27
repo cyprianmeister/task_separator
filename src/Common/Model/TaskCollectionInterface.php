@@ -10,5 +10,5 @@ interface TaskCollectionInterface extends \Iterator, \Countable
 
     public function add(BaseTask $task): void;
 
-    public function take(int $key): ?BaseTask;
+    public function get(int $key): ?BaseTask;
 }

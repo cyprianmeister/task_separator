@@ -69,8 +69,8 @@ class TaskCollection implements TaskCollectionInterface
         $this->items[] = $task;
     }
 
-    public function take(int $key): ?BaseTask
+    public function get(int $key): ?BaseTask
     {
-        return array_slice($this->items, $key, 1)[0] ?? null;
+        return $this->items[$key] ?? null;
     }
 }
