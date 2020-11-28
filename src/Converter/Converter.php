@@ -8,7 +8,7 @@ use App\Converter\Type\ConverterInterface;
 use App\Reader\Model\InputTask;
 use App\Writer\Model\OutputTask;
 
-final class Converter implements ConverterInterface
+class Converter implements ConverterInterface
 {
     private array $strategies;
 

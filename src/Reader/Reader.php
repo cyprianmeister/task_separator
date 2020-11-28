@@ -6,7 +6,7 @@ use App\Common\Model\TaskCollectionInterface;
 use App\Reader\Type\ReaderFactoryInterface;
 use App\Reader\Type\ReaderInterface;
 
-final class Reader
+class Reader
 {
     private ReaderFactoryInterface $readerFactory;
 

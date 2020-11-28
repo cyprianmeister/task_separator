@@ -6,7 +6,7 @@ use App\Common\Model\TaskCollectionInterface;
 use App\Writer\Type\WriterFactoryInterface;
 use App\Writer\Type\WriterInterface;
 
-final class Writer
+class Writer
 {
     private WriterFactoryInterface $writerFactory;
 

@@ -7,7 +7,7 @@ use App\Common\Model\TaskCollectionInterface;
 use App\Separator\Handler\HandlerFactory;
 use App\Separator\Handler\HandlerInterface;
 
-final class Separator
+class Separator
 {
     private array $targetTypes;
 

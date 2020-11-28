@@ -15,10 +15,10 @@ class MainCommandTest extends TestCase
 
         $commandTester = new CommandTester($command);
         $commandTester->execute([
-            'inputFile' => 'input.json',
+            'inputFile' => __DIR__ . '/assets/task_source_real.json',
         ]);
 
         $output = $commandTester->getDisplay();
-        $this->assertStringContainsString('You passed an argument: input.json', $output);
+        $this->assertStringContainsString('Tasks has been separated', $output);
     }
 }
