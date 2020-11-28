@@ -8,6 +8,8 @@ use App\Common\Model\TaskCollectionInterface;
 use App\Converter\Type\AccidentConverter;
 use App\Converter\Type\InspectionConverter;
 use App\Reader\Model\InputTask;
+use App\Separator\Validator\Validator;
+use App\View\View;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -40,7 +42,7 @@ class MainCommand extends Command
                 "  App separates tasks from the input JSON file to the output files:\n".
                 "  - inspections.json - inspection tasks\n".
                 "  - accidents.json   - accident tasks\n".
-                "  - unknown.json     - tasks with incorrect data"
+                "  - errors.json      - tasks with incorrect data"
             )
             ->addArgument(self::ARG_INPUT_FILE, InputArgument::REQUIRED, 'Input JSON file with the list of tasks')
         ;
@@ -48,30 +50,27 @@ class MainCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
-
-        $this->showHeader($io);
+        $view = new View(new SymfonyStyle($input, $output));
+        $view->showHeader($this->getApplication()->getName(), $this->getApplication()->getVersion());
 
         if ($inputFile = $input->getArgument(self::ARG_INPUT_FILE)) {
             try {
                 $ioType = $this->getFileType($inputFile);
-
+                $validator = new Validator();
                 $sourceCollection = $this->getSourceCollection($inputFile, $ioType);
+                [$targets, $errors] = $this->separateTasks($sourceCollection, $validator);
+                $this->writeTargets($ioType, $targets, $errors);
 
-                $this->writeTargets($ioType, ...$this->separateTasks($sourceCollection));
-
-                $io->success('Tasks has been separated');
+                $counter = new Counter($targets, $errors);
+                $view->showErrors($validator->getErrors());
+                $view->showSummary($counter);
+                $view->showSuccess();
             } catch (\Throwable $e) {
-                $io->error($e->getMessage());
+                $view->showException($e);
             }
         }
 
         return Command::SUCCESS;
-    }
-
-    private function showHeader(SymfonyStyle $io): void
-    {
-        $io->writeln($this->getApplication()->getName() . ' ' . $this->getApplication()->getVersion());
     }
 
     private function getFileType(string $filename): string
@@ -88,9 +87,9 @@ class MainCommand extends Command
         return $reader->read($inputFile)->getUniqueByCallback(fn (InputTask $item) => trim($item->getDescription()));
     }
 
-    private function separateTasks(TaskCollectionInterface $sourceCollection): array
+    private function separateTasks(TaskCollectionInterface $sourceCollection, Validator $validator): array
     {
-        $separator = SeparatorFactory::create(self::TARGETS, self::TASK_CONVERTERS);
+        $separator = SeparatorFactory::create(self::TARGETS, self::TASK_CONVERTERS, $validator);
         $separator->process($sourceCollection);
 
         $targets = $separator->getTargets();

@@ -69,7 +69,7 @@ App produces two or three output files:
 ]
 ```
 
-- __unknown.json__ - tasks with incorrect data (optional). File format is the as the input file.
+- __errors.json__ - tasks with incorrect data (optional). File format is the as the input file.
 
 For help screen please use:
 

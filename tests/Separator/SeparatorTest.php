@@ -12,6 +12,7 @@ use App\Separator\Handler\ConverterHandler;
 use App\Separator\Handler\ErrorHandler;
 use App\Separator\Handler\HandlerFactory;
 use App\Separator\Separator;
+use App\Separator\Validator\Validator;
 use App\Writer\Model\Accident;
 use PHPUnit\Framework\TestCase;
 
@@ -25,30 +26,30 @@ class SeparatorTest extends TestCase
                 'description' => 'Opis zwykłego zlecenia.',
                 'dueDate' => new \DateTime('2020-01-04 13:30:00'),
                 'phone' => '123456789',
-                'isValid' => true,
             ]),
             new InputTask([
                 'number' => 2,
                 'description' => 'Opis zwykłego zlecenia.',
                 'dueDate' => new \DateTime('2020-01-04 13:30:00'),
                 'phone' => '123456789',
-                'isValid' => true,
             ]),
             new InputTask([
                 'number' => 3,
                 'description' => 'Opis zwykłego zlecenia.',
-                'dueDate' => null,
+                'dueDate' => 'it is error',
                 'phone' => '123456789',
-                'isValid' => false,
             ]),
         ]);
         $separator = new Separator(
             [TaskType::INSPECTION, TaskType::ACCIDENT],
             [ErrorHandler::class, ConverterHandler::class],
-            new HandlerFactory(new Converter([
-                TaskType::INSPECTION => InspectionConverter::class,
-                TaskType::ACCIDENT => AccidentConverter::class,
-            ])),
+            new HandlerFactory(
+                new Converter([
+                    TaskType::INSPECTION => InspectionConverter::class,
+                    TaskType::ACCIDENT => AccidentConverter::class,
+                ]),
+                new Validator()
+            ),
         );
         $separator->process($sourceCollection);
         $targets = $separator->getTargets();

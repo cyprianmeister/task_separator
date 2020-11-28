@@ -85,35 +85,6 @@ class JsonReaderTest extends TestCase
         $this->assertEquals('', $task->getPhone());
     }
 
-    public function testGetTaskCollectionIfJsonFileHasIncorrectValues(): void
-    {
-        $source = __DIR__ . '/../../assets/task_source_with_errors.json';
-        $taskCollection = $this->jsonReader->read($source);
-
-        $this->assertIsIterable($taskCollection);
-        $this->assertCount(3, $taskCollection);
-
-        $task = $taskCollection->current();
-        $this->assertEquals('1.234', $task->getNumber());
-        $this->assertEquals('', $task->getDescription());
-        $this->assertEquals('xyz', $task->getPhone());
-        $this->assertFalse($task->isValid());
-
-        $task = $taskCollection->next();
-        $this->assertEquals('xyz', $task->getNumber());
-        $this->assertEquals('1.234', $task->getDescription());
-        $this->assertEquals('2020/01/07', $task->getDueDate());
-        $this->assertEquals('', $task->getPhone());
-        $this->assertFalse($task->isValid());
-
-        $task = $taskCollection->next();
-        $this->assertNull($task->getNumber());
-        $this->assertEquals('', $task->getDescription());
-        $this->assertNull($task->getDueDate());
-        $this->assertEquals('', $task->getPhone());
-        $this->assertFalse($task->isValid());
-    }
-
     public function testGetTaskCollectionIfJsonIsIncorrect(): void
     {
         $source = __DIR__ . '/../../assets/task_source_with_json_error.json';

@@ -2,3 +2,5 @@
 /vendor/
 /.phpunit.result.cache
 /tests/assets/result/*.json
+/*.json
+~/composer.json

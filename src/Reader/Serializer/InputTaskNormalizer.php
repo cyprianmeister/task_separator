@@ -24,7 +24,6 @@ class InputTaskNormalizer implements DenormalizerInterface
 
         $data['description'] = $this->getDescription($data);
         $data['phone'] = $data['phone'] ?? '';
-        $data['isValid'] = $this->getValidation($data);
 
         return new $type($data);
     }
@@ -56,14 +55,6 @@ class InputTaskNormalizer implements DenormalizerInterface
         }
 
         return $data['description'] ?? '';
-    }
-
-    private function getValidation(array $data): bool
-    {
-        $dueDateIsValid = !array_key_exists('dueDate', $data) || !is_string($data['dueDate']);
-        $numberIsValid = isset($data['number']) && !is_string($data['number']);
-
-        return $dueDateIsValid && $numberIsValid;
     }
 
     public function supportsDenormalization($data, string $type, string $format = null): bool
