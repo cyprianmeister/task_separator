@@ -2,7 +2,7 @@
 
 namespace App\View;
 
-use App\Counter;
+use App\Tool\Counter;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
@@ -60,7 +60,7 @@ class View
             $list[] = [$key, $value];
         }
         $list[] = new TableSeparator();
-        $list[] = ['all', $counter->getSum()];
+        $list[] = ['all unique processed tasks', $counter->getSum()];
         return $list;
     }
 }

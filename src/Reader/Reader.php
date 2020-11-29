@@ -5,6 +5,7 @@ namespace App\Reader;
 use App\Common\Model\TaskCollectionInterface;
 use App\Reader\Type\ReaderFactoryInterface;
 use App\Reader\Type\ReaderInterface;
+use App\Tool\Logger;
 
 class Reader
 {
@@ -25,6 +26,7 @@ class Reader
 
     public function read(string $source): TaskCollectionInterface
     {
+        Logger::use()->log('Read source from ' . $source, ['strategy' => get_class($this->strategy)]);
         return $this->strategy->read($source);
     }
 }

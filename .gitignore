@@ -4,3 +4,4 @@
 /tests/assets/result/*.json
 /*.json
 ~/composer.json
+/*.log

@@ -9,6 +9,8 @@ use App\Converter\Type\AccidentConverter;
 use App\Converter\Type\InspectionConverter;
 use App\Reader\Model\InputTask;
 use App\Separator\Validator\Validator;
+use App\Tool\Counter;
+use App\Tool\Logger;
 use App\View\View;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -67,6 +69,7 @@ class MainCommand extends Command
                 $view->showSuccess();
             } catch (\Throwable $e) {
                 $view->showException($e);
+                Logger::use()->log($e->getMessage(), ['trace' => $e->getTraceAsString()], Logger::ERROR);
             }
         }
 

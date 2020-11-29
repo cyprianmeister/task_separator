@@ -12,8 +12,6 @@ class InputTask extends BaseTask
     /** @var \DateTime|string|null */
     protected $dueDate;
 
-    protected bool $isValid = true;
-
     public function __construct(array $data)
     {
         foreach ($data as $key => $value) {
@@ -28,11 +26,6 @@ class InputTask extends BaseTask
     public function getNumber()
     {
         return $this->number;
-    }
-
-    public function isValid(): bool
-    {
-        return $this->isValid;
     }
 
     public function getDescription(): string

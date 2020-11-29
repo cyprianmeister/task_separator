@@ -2,6 +2,8 @@
 
 namespace App\Common\Model;
 
+use App\Tool\Logger;
+
 class TaskCollection implements TaskCollectionInterface
 {
     private array $items;
@@ -61,6 +63,9 @@ class TaskCollection implements TaskCollectionInterface
         $keys = array_keys(array_unique($mappedItems));
         $filteredItems = array_filter($this->items, fn (int $key) => in_array($key, $keys), ARRAY_FILTER_USE_KEY);
 
+        $duplicates = array_diff($this->mapToNumbers($this->items), $this->mapToNumbers($filteredItems));
+        Logger::use()->log('Remove duplicates', ['duplicates' => implode(', ', $duplicates)]);
+
         return new TaskCollection($filteredItems);
     }
 
@@ -72,5 +77,13 @@ class TaskCollection implements TaskCollectionInterface
     public function get(int $key): ?BaseTask
     {
         return $this->items[$key] ?? null;
+    }
+
+    private function mapToNumbers(array $items): array
+    {
+        return array_map(
+            fn (BaseTask $item) => (method_exists($item, 'getNumber') ? $item->getNumber() : 'null'),
+            $items
+        );
     }
 }

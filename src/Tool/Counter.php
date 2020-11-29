@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Tool;
 
 use App\Common\Model\TaskCollectionInterface;
 
